@@ -1,7 +1,7 @@
 #!/bin/bash
 
-archive_name="BACKUP.tar"
-path="~/"
+archive_name="BACKUP.tar.gz"
+path="default"
 extensions="*"
 
 while getopts "e:n:p:" opt; do
@@ -28,7 +28,15 @@ while getopts "e:n:p:" opt; do
 	esac
 done
 
+# Choosing the catalogue where we would copy files to.
+if [ "$path" == "default" ]; then
+	path="$PWD"
+fi
+cd $path
 
 
+
+# Compressing every file in folder to our archive.
+tar -czf "$PWD/$archive_name" "$path"
 
 echo "Done."
