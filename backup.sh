@@ -1,24 +1,34 @@
 #!/bin/bash
 
+archive_name="BACKUP.tar"
+path="~/"
+extensions="*"
+
 while getopts "e:n:p:" opt; do
 	case $opt in
 		e)
-			echo "Extension!"
+			extensions=$OPTARG
 		;;
 
 		n)
-			echo "Name!"
+			archive_name=$OPTARG
 		;;
 
 		p)
-			echo "Path!"
+			path=$OPTARG
 		;;
 
 		\?)
-			echo "Invalid option: -$OPTARG"
+			echo "Invalid option: -$OPTARG."
+		;;
+
+		:)
+			echo "Option -$OPTARG requiers an argument."
 		;;
 	esac
 done
+
+
 
 
 echo "Done."
