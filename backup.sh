@@ -30,13 +30,14 @@ done
 
 # Choosing the catalogue where we would copy files to.
 if [ "$path" == "default" ]; then
-	path="$PWD"
+	path="$PWD/BACKUP"
 fi
-cd $path
+mkdir -p "$path"
 
-
+# The copying algorithm with identical names conflicts handling.
+find ~ -name "*.$extensions" -type f -exec cp -f --backup --suffix=_copy -t $path '{}' &>/dev/null \;
 
 # Compressing every file in folder to our archive.
-tar -czf "$PWD/$archive_name" "$path"
+tar -czf "$PWD/$archive_name" -C "$path" . &>/dev/null
 
 echo "Done."
