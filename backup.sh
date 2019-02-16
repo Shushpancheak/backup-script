@@ -35,7 +35,7 @@ fi
 mkdir -p "$path"
 
 # The copying algorithm with identical names conflicts handling.
-find ~ -name "*.$extensions" -type f -exec cp -f --backup --suffix=_copy -t $path '{}' &>/dev/null \;
+find $HOME -not -path "$path*" -name "*.$extensions" -type f -exec cp -f --backup --suffix=_COPY -t "$path" '{}' &>/dev/null \;
 
 # Compressing every file in folder to our archive.
 tar -czf "$PWD/$archive_name" -C "$path" . &>/dev/null
